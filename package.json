@@ -2,9 +2,10 @@
   "name": "headquarters-node",
   "version": "1.0.0",
   "description": "A wrapper for the headquarters api.",
-  "main": "lib/index.js",
+  "main": "lib/headquarters-node.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node lib/headquarters-node.js",
+    "test": "mocha"
   },
   "author": "Gabriel Poça <gabrielpoca@gmail.com> (http://gabrielpoca.com/)",
   "license": "ISC",
@@ -15,6 +16,10 @@
     "simple-oauth2": "^0.2.1"
   },
   "devDependencies": {
-    "express": "^4.10.7"
+    "chai": "^1.10.0",
+    "chai-as-promised": "^4.1.1",
+    "express": "^4.10.7",
+    "mocha": "^2.1.0",
+    "nock": "^0.57.0"
   }
 }
