@@ -15,6 +15,15 @@ function mockMembers(members) {
   return members;
 }
 
+function mockMembersSearch(query, response) {
+  response = response || defaultMembers;
+
+  nock.get(Constants.APIMembersPath + '?q=' + query)
+    .reply(200, response);
+
+  return response;
+}
+
 function mockAccessToken(token) {
   token = token || defaultToken;
 
@@ -30,5 +39,6 @@ function mockAccessToken(token) {
 
 global.Mock = {
   accessToken: mockAccessToken,
-  members: mockMembers
+  members: mockMembers,
+  membersSearch: mockMembersSearch
 };

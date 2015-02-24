@@ -9,6 +9,9 @@ module.exports = function (authorization) {
   return {
     all: function () {
       return request.get(Constants.APIMembersURL);
+    },
+    search: function (query) {
+      return request.get(Constants.APIMembersURL + ("?q=" + query));
     }
   };
 };
