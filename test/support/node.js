@@ -8,7 +8,6 @@ var Constants = require('../../dist/constants');
 var Settings = require('../../settings.json');
 
 Settings.redirectURL = generateRedirectURL();
-Headquarters.initialize(Settings);
 chai.should();
 
 global.Settings = Settings;

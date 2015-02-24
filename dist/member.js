@@ -1,10 +1,14 @@
 "use strict";
 
-var request = require("./request");
+var Request = require("./request");
 var Constants = require("./constants");
 
-module.exports = {
-  all: function () {
-    return request.get(Constants.APIMembersURL);
-  }
+module.exports = function (authorization) {
+  var request = Request(authorization);
+
+  return {
+    all: function () {
+      return request.get(Constants.APIMembersURL);
+    }
+  };
 };

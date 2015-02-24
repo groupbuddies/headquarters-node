@@ -7,7 +7,7 @@ var R = require('ramda');
 var credentials = require('./settings.json');
 var app = Express();
 
-Headquarters.initialize(credentials);
+var headquarters = Headquarters(credentials);
 
 var requestOptions = R.curry(function(method, url, token) {
   return {
@@ -21,7 +21,7 @@ var requestOptions = R.curry(function(method, url, token) {
 });
 
 var performRequest = function(method, url) {
-  return Headquarters
+  return headquarters
     .accessToken()
     .then( requestOptions(method, url) )
     .then(function(options) {
@@ -37,7 +37,7 @@ var performRequest = function(method, url) {
 };
 
 app.get('/authorize', function(req, res) {
-  Headquarters
+  headquarters
     .redirectURL()
     .then(function(url) {
       console.log('REDIRECT_URL', url);
@@ -49,10 +49,10 @@ app.get('/authorize', function(req, res) {
 });
 
 app.get('/callback', function(req, res) {
-  Headquarters
+  headquarters
     .setCode(req.query.code)
     .then(function() {
-      return Headquarters.Member.all();
+      return headquarters.Member.all();
     })
     .then(function(response) {
       return res.send(response);

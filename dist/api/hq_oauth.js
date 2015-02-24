@@ -20,13 +20,18 @@ module.exports = function (settings) {
   var oauth = Oauth(R.omit("callbackURL", settings));
   var callbackURL = settings.callbackURL;
 
+  return {
+    redirectURL: redirectURL,
+    setCode: setCode
+  };
+
   function redirectURL() {
     var url = oauth.authCode.authorizeURL({
       redirect_uri: callbackURL
     });
 
     return Q(url);
-  };
+  }
 
   function setCode(code) {
     var deferred = Q.defer();
@@ -46,10 +51,5 @@ module.exports = function (settings) {
     }
 
     return deferred.promise;
-  };
-
-  return {
-    redirectURL: redirectURL,
-    setCode: setCode
-  };
+  }
 };

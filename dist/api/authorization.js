@@ -3,39 +3,42 @@
 var Q = require("q");
 var R = require("ramda");
 
-var settings, token, HQOauth;
+module.exports = function (options) {
+  var settings, token, HQOauth;
 
-function parseUserOptions(options) {
+  initialize(options);
+
   return {
-    clientID: options.clientID,
-    clientSecret: options.clientSecret,
-    callbackURL: options.callbackURL
-  };
-}
+    accessToken: accessToken,
+    redirectURL: redirectURL,
+    setCode: R.pPipe(setCode, R.tap(saveAccessToken)) };
 
-function saveAccessToken(newToken) {
-  token = newToken;
-}
+  function initialize(options) {
+    settings = parseUserOptions(options);
+    HQOauth = require("./hq_oauth")(settings);
+  }
 
-function accessToken() {
-  return token;
-}
+  function parseUserOptions(options) {
+    return {
+      clientID: options.clientID,
+      clientSecret: options.clientSecret,
+      callbackURL: options.callbackURL
+    };
+  }
 
-function initialize(options) {
-  settings = parseUserOptions(options);
-  HQOauth = require("./hq_oauth")(settings);
-}
+  function saveAccessToken(newToken) {
+    token = newToken;
+  }
 
-function redirectURL() {
-  return HQOauth.redirectURL();
-}
+  function accessToken() {
+    return token;
+  }
 
-function setCode(code) {
-  return HQOauth.setCode(code);
-}
+  function redirectURL() {
+    return HQOauth.redirectURL();
+  }
 
-module.exports = {
-  initialize: initialize,
-  accessToken: accessToken,
-  redirectURL: redirectURL,
-  setCode: R.pPipe(setCode, R.tap(saveAccessToken)) };
+  function setCode(code) {
+    return HQOauth.setCode(code);
+  }
+};

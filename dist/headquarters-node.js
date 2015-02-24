@@ -3,14 +3,18 @@
 var Authorization = require("./api/authorization");
 var Member = require("./member");
 var Constants = require("./constants");
+var Request = require("./request");
 
-module.exports = {
-  initialize: Authorization.initialize,
+module.exports = function (options) {
+  var authorization = Authorization(options);
+  var member = Member(authorization);
 
-  redirectURL: Authorization.redirectURL,
-  accessToken: Authorization.accessToken,
-  setCode: Authorization.setCode,
+  return {
+    redirectURL: authorization.redirectURL,
+    accessToken: authorization.accessToken,
+    setCode: authorization.setCode,
 
-  Member: Member,
-  Constants: Constants
+    Member: member,
+    Constants: Constants
+  };
 };
