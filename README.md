@@ -1,6 +1,8 @@
 Headquarters-node
 ================
 
+[![Build Status](https://semaphoreapp.com/api/v1/projects/f70c710e-d453-4c9e-bdf2-665718bef386/358218/shields_badge.svg)](https://semaphoreapp.com/groupbuddies/headquarters-node)
+
 Node wrapper for the [headquarters API](https://github.com/groupbuddies/headquarters).
 
 ## Contributing
