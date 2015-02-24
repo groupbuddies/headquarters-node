@@ -1,4 +1,0 @@
---reporter spec
---require test/support/settings
---require test/support/node
---require test/support/stubs

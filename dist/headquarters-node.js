@@ -1,6 +1,8 @@
-var Authorization = require('./api/authorization');
-var Member = require('./member');
-var Constants = require('./constants');
+"use strict";
+
+var Authorization = require("./api/authorization");
+var Member = require("./member");
+var Constants = require("./constants");
 
 module.exports = {
   initialize: Authorization.initialize,

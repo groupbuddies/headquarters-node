@@ -1,21 +1,28 @@
-"use strict";
+'use strict';
 
 var Q = require('q');
-var chai = require("chai");
-var chaiAsPromised = require("../..");
+var chai = require('chai');
 var R = require('ramda');
-var Headquarters = require('../../lib/headquarters-node');
+var Headquarters = require('../../dist/headquarters-node');
+var Constants = require('../../dist/constants');
+var Settings = require('../../settings.json');
 
-chai.use(chaiAsPromised);
+Settings.redirectURL = generateRedirectURL();
+Headquarters.initialize(Settings);
 chai.should();
 
-chaiAsPromised.transferPromiseness = function(assertion, promise) {
-  assertion.then = promise.then.bind(promise); // this is all you get by default
-  assertion.finally = promise.finally.bind(promise);
-  assertion.done = promise.done.bind(promise);
-};
-
+global.Settings = Settings;
 global.Headquarters = Headquarters;
 global.R = R;
-global.chaiAsPromised = chaiAsPromised;
 global.expect = chai.expect;
+
+function generateRedirectURL() {
+  var template = 'HOST/oauth/authorize?'
+      + 'redirect_uri=CALLBACK&response_type=code&client_id=CLIENT';
+
+  return template
+    .replace('HOST', Constants.APIBaseURL)
+    .replace('CALLBACK', encodeURIComponent(Settings.callbackURL))
+    .replace('CLIENT', Settings.clientID);
+}
+

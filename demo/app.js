@@ -1,17 +1,47 @@
-var Headquarters = require('../lib/headquarters-node');
+var Headquarters = require('../dist/headquarters-node');
 var Express = require('express');
 var request = require('request');
+var Q = require('q');
+var R = require('ramda');
 
 var credentials = require('./settings.json');
-
-var headquarters = Headquarters(credentials);
 var app = Express();
 
+Headquarters.initialize(credentials);
+
+var requestOptions = R.curry(function(method, url, token) {
+  return {
+    url: url,
+    method: method,
+    headers:  {
+      Authorization: 'Bearer ' + token,
+      Accept: 'v2'
+    }
+  };
+});
+
+var performRequest = function(method, url) {
+  return Headquarters
+    .accessToken()
+    .then( requestOptions(method, url) )
+    .then(function(options) {
+      var deferred = Q.defer();
+      request.get(options, function(err, response, body) {
+        if (err)
+          deferred.reject(err);
+        else
+          deferred.resolve(body);
+      });
+      return deferred.promise;
+    });
+};
+
 app.get('/authorize', function(req, res) {
-  headquarters
+  Headquarters
     .redirectURL()
     .then(function(url) {
-      res.redirect(url)
+      console.log('REDIRECT_URL', url);
+      res.redirect(url);
     })
     .catch(function(err) {
       res.send(err);
@@ -19,24 +49,17 @@ app.get('/authorize', function(req, res) {
 });
 
 app.get('/callback', function(req, res) {
-  headquarters
+  Headquarters
     .setCode(req.query.code)
-    .then(function(token) {
-      var options = {
-        url: 'http://hq.groupbuddies.com/internal/members',
-        oauth: {
-          consumer_key: credentials.clientID,
-          consumer_secret: credentials.clientSecret,
-          token: token
-        }
-      };
-
-      request.get(options, function(err, response, body) {
-        if (err)
-          res.send(err);
-
-        res.send(body);
-      });
+    .then(function() {
+      return Headquarters.Member.all();
+    })
+    .then(function(response) {
+      return res.send(response);
+    })
+    .catch(function(err) {
+      console.log(err);
+      return res.send(err);
     });
 });
 
