@@ -31,6 +31,8 @@ module.exports = function (options) {
   }
 
   function accessToken() {
+    var newToken = arguments[0] === undefined ? undefined : arguments[0];
+    if (newToken) saveAccessToken(newToken);
     return token;
   }
 

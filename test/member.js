@@ -12,8 +12,7 @@ describe('Members', function() {
 
     return headquarters.member.all()
       .then(function(response) {
-        var responseMembers = JSON.parse(response);
-        expect(responseMembers.length).to.equal(members.length);
+        expect(response.length).to.equal(members.length);
         done();
       })
       .catch(function(err) {
@@ -30,8 +29,7 @@ describe('Members', function() {
 
     return headquarters.member.search(queryEmail)
       .then(function(response) {
-        var responseMembers = JSON.parse(response);
-        expect(responseMembers[0].email).to.equal(queryEmail)
+        expect(response[0].email).to.equal(queryEmail)
         done()
       })
       .catch(function(err) {

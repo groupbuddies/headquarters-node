@@ -7,16 +7,30 @@ var Constants = require("./constants");
 
 var baseURL = Constants.APIBaseURL;
 
-function requestOptions(method, token, url) {
+var requestOptions = function (method, token, url) {
+  var form = arguments[3] === undefined ? "" : arguments[3];
   return {
     url: url,
     method: method,
     headers: {
       Authorization: "Bearer " + token,
       Accept: "v2"
-    }
+    },
+    form: form
   };
-}
+};
+
+var resolveResponse = R.curry(function (deferred, err, response, body) {
+  if (err) {
+    deferred.reject(err);
+  } else {
+    var parsedBody;
+
+    if (body) parsedBody = JSON.parse(body);
+
+    deferred.resolve(parsedBody);
+  }
+});
 
 module.exports = function (authorization) {
   return {
@@ -26,9 +40,17 @@ module.exports = function (authorization) {
 
       var options = requestOptions("GET", accessToken, url);
 
-      Request.get(options, function (err, respons, body) {
-        if (err) deferred.reject(err);else deferred.resolve(body);
-      });
+      Request.get(options, resolveResponse(deferred));
+
+      return deferred.promise;
+    },
+    post: function (url, body) {
+      var deferred = Q.defer();
+      var accessToken = authorization.accessToken();
+
+      var options = requestOptions("POST", accessToken, url, body);
+
+      Request.post(options, resolveResponse(deferred));
 
       return deferred.promise;
     }

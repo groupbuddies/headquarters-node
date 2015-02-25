@@ -18,14 +18,6 @@ describe('Headquarters: Authorization', function() {
     headquarters = Headquarters(Settings);
   });
 
-  it('should return a url to redirect the user', function(done) {
-    headquarters.redirectURL()
-      .should
-      .eventually
-      .equal(Settings.redirectURL)
-      .notify(done);
-  });
-
   it('should set the code', function(done) {
     var accessToken = Mock.accessToken();
 
@@ -33,6 +25,25 @@ describe('Headquarters: Authorization', function() {
       .should
       .eventually
       .equal(accessToken)
+      .notify(done);
+  });
+
+  it('should set the access token', function(done) {
+    var accessToken = 'abc';
+    headquarters.accessToken(accessToken);
+
+    expect(headquarters.accessToken())
+      .to
+      .equal(accessToken);
+
+    done();
+  });
+
+  it('should return a url to redirect the user', function(done) {
+    headquarters.redirectURL()
+      .should
+      .eventually
+      .equal(Settings.redirectURL)
       .notify(done);
   });
 

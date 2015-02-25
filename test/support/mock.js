@@ -37,8 +37,14 @@ function mockAccessToken(token) {
   return token;
 }
 
+function mockEmail() {
+  nock.post(Constants.APIEmailPath)
+    .reply(200);
+}
+
 global.Mock = {
   accessToken: mockAccessToken,
   members: mockMembers,
-  membersSearch: mockMembersSearch
+  membersSearch: mockMembersSearch,
+  email: mockEmail
 };
