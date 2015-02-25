@@ -14,7 +14,7 @@ module.exports = function (options) {
     accessToken: authorization.accessToken,
     setCode: authorization.setCode,
 
-    Member: member,
+    member: member,
     Constants: Constants
   };
 };

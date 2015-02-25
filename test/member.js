@@ -10,7 +10,7 @@ describe('Members', function() {
   it('should return the list of members', function(done) {
     var members = Mock.members();
 
-    return headquarters.Member.all()
+    return headquarters.member.all()
       .then(function(response) {
         var responseMembers = JSON.parse(response);
         expect(responseMembers.length).to.equal(members.length);
@@ -28,7 +28,7 @@ describe('Members', function() {
       email: queryEmail
     }]);
 
-    return headquarters.Member.search(queryEmail)
+    return headquarters.member.search(queryEmail)
       .then(function(response) {
         var responseMembers = JSON.parse(response);
         expect(responseMembers[0].email).to.equal(queryEmail)

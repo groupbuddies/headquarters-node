@@ -53,7 +53,7 @@ To retrieve a collection of all members of the team you might use the `all`
 method:
 
 ```js
-return headquarters.Member.all();
+return headquarters.member.all();
 ```
 
 This returns a promise that resolves an array of members.
@@ -64,7 +64,7 @@ To search members of the team you might use the `search`
 method:
 
 ```js
-return headquarters.Member.search('gabrielpoca@gmail.com');
+return headquarters.member.search('gabrielpoca@gmail.com');
 ```
 
 This returns a promise that resolves an array of members.
