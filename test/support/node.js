@@ -18,8 +18,8 @@ global.R = R;
 global.expect = chai.expect;
 
 function generateRedirectURL() {
-  var template = 'HOST/oauth/authorize?'
-      + 'redirect_uri=CALLBACK&response_type=code&client_id=CLIENT';
+  var template = Constants.APITokenURL
+      + '?redirect_uri=CALLBACK&response_type=code&client_id=CLIENT';
 
   return template
     .replace('HOST', Constants.APIBaseURL)
