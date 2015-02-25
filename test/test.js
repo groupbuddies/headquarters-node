@@ -19,45 +19,35 @@ describe('Headquarters: Authorization', function() {
   });
 
   it('should return a url to redirect the user', function(done) {
-    return headquarters
-      .redirectURL()
-      .then(function(url) {
-        expect(url).to.equal(Settings.redirectURL);
-        done();
-      })
-      .catch(function(err) {
-        done(err);
-      });
+    headquarters.redirectURL()
+      .should
+      .eventually
+      .equal(Settings.redirectURL)
+      .notify(done);
   });
 
   it('should set the code', function(done) {
     var accessToken = Mock.accessToken();
 
-    return headquarters
-      .setCode('code')
-      .then(function(responseToken) {
-        expect(responseToken).to.equal(accessToken);
-        done();
-      })
-      .catch(function(err) {
-        done(err);
-      });
+    headquarters.setCode('code')
+      .should
+      .eventually
+      .equal(accessToken)
+      .notify(done);
   });
 
   it('should return the access token', function(done) {
     var accessToken = Mock.accessToken();
 
-    return headquarters
-      .setCode('code')
-      .then(function() {
-        return headquarters.accessToken();
-      })
-      .then(function(responseToken) {
-        expect(responseToken).to.equal(accessToken);
-        done();
-      })
-      .catch(function(err) {
-        done(err);
-      });
+    function requestAccessToken() {
+      return headquarters.accessToken();
+    }
+
+    return headquarters.setCode('code')
+      .then(requestAccessToken)
+      .should
+      .eventually
+      .equal(accessToken)
+      .notify(done);
   });
 });
