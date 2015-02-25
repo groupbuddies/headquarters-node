@@ -5,19 +5,19 @@ Headquarters-node
 
 Node wrapper for the [headquarters API](https://github.com/groupbuddies/headquarters).
 
-## Setup
+## Installation
 
-The first step to setup headquarters-node is to register an application on the headquarters.
+Add headquarters-node to your dependencies:
 
-To use the headquarters-node you need to require:
+```
+npm install headquarters-node --save
+```
+
+Then require and instantiate it with the `clientID` `clientSecret` and `callbackURL` (you need to have an application registered on the [headquarters](https://hq.groupbuddies.com/admin) first):
 
 ```js
 var Headquarters = require('headquarters-node');
-```
 
-Now you can instantiate the client. You need to pass an object with the keys `clientID`, `clientSecret` and `callbackURL`:
-
-```js
 var credentials = {
   clientID: "dummy_client_id",
   clientSecret: "dummy_client_secret",
@@ -27,18 +27,20 @@ var credentials = {
 var headquarters = Headquarters(credentials);
 ```
 
-Once you have this instance you need to first setup redirect you users. To generate the redirect url call the `redirectURL` method:
+### Authorization
+
+Once you have an instance of the headquarters-node you need to have you'r users authorize the requests you make. First, they need to be redirect to an authorization page. To generate the redirect url call the `redirectURL` method:
 
 ```js
 headquarters.redirectURL();
 ```
 
-This method returns a promise that resolves with the url for you to redirect your users.
+This method returns a promise that resolves with the url for the authorization page.
 
-Now you need to listen on you callback endpoint, you'll get a request from the server with the oauth code. You need to call `setCode` on headquarters-node.
+Now you need to listen on you callback endpoint (the one you setup on your application registration), the headquarters will issue a get a request from the with the oauth code. You need to call `setCode` on headquarters-node with this code.
 
 ```js
-headquarters.setCode(req.query.code)
+headquarters.setCode(code)
 ```
 
 This method returns a promise when finished. After that you can start making requests to the headquarters.
