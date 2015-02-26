@@ -7,7 +7,7 @@ describe('Email', function() {
     headquarters = Headquarters(Settings);
   });
 
-  it('should send an email', function(done) {
+  it('should send an email', function() {
     Mock.email();
 
     var params = {
@@ -16,8 +16,7 @@ describe('Email', function() {
       body: 'Email content'
     };
 
-    headquarters.email.send(params)
-      .should.eventually.be.fulfilled
-      .and.notify(done);
+    return headquarters.email.send(params)
+      .should.eventually.be.fulfilled;
   });
 });

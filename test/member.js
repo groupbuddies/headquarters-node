@@ -7,20 +7,16 @@ describe('Members', function() {
     headquarters = Headquarters(Settings);
   });
 
-  it('should return the list of members', function(done) {
+  it('should return the list of members', function() {
     var members = Mock.members();
 
     return headquarters.member.all()
       .then(function(response) {
         expect(response.length).to.equal(members.length);
-        done();
-      })
-      .catch(function(err) {
-        done(err);
       });
   });
 
-  it('should search for a user', function(done) {
+  it('should search for a user', function() {
     var queryEmail = 'gabriel@groupbuddies.com';
 
     var members = Mock.membersSearch(queryEmail, [{
@@ -30,10 +26,6 @@ describe('Members', function() {
     return headquarters.member.search(queryEmail)
       .then(function(response) {
         expect(response[0].email).to.equal(queryEmail)
-        done()
-      })
-      .catch(function(err) {
-        done(err);
       });
   })
 });
