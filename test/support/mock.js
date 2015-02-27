@@ -1,7 +1,7 @@
 'use strict';
 
 var Constants = require('../../dist/constants');
-var Nock = require('Nock');
+var Nock = require('nock');
 
 var defaultToken = 'STUB TOKEN';
 var defaultMembers = [1, 2, 3, 4];
