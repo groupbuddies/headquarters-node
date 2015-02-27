@@ -5,6 +5,10 @@ var APIMembersPath = "/members";
 var APIEmailPath = "/emails";
 var APITokenPath = "/oauth/authorize";
 
+var Github = {
+  APIPullRequestPath: "/github/pull_requests"
+};
+
 var Constants = {
   APIBaseURL: APIBaseURL,
   APITokenPath: APITokenPath,
@@ -12,7 +16,11 @@ var Constants = {
   APIMembersPath: APIMembersPath,
   APIMembersURL: APIBaseURL + APIMembersPath,
   APIEmailPath: APIEmailPath,
-  APIEmailURL: APIBaseURL + APIEmailPath
+  APIEmailURL: APIBaseURL + APIEmailPath,
+  Github: {
+    APIPullRequestPath: Github.APIPullRequestPath,
+    APIPullRequestURL: APIBaseURL + Github.APIPullRequestPath
+  }
 };
 
 module.exports = Constants;

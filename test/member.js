@@ -19,7 +19,7 @@ describe('Members', function() {
   it('should search for a user', function() {
     var queryEmail = 'gabriel@groupbuddies.com';
 
-    var members = Mock.membersSearch(queryEmail, [{
+    var members = Mock.membersSearch([{
       email: queryEmail
     }]);
 
