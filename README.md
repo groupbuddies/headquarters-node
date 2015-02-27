@@ -45,7 +45,7 @@ headquarters.setCode(code)
 
 This method returns a promise when finished. After that you can start making requests to the headquarters.
 
-## Members
+## Member
 
 ### all
 
@@ -68,6 +68,41 @@ return headquarters.member.search('gabrielpoca@gmail.com');
 ```
 
 This returns a promise that resolves an array of members.
+
+## Email
+
+### send
+
+To send emails you can use the following method:
+
+```js
+var params = {
+  to: 'gabriel@groupbuddies.com',
+  subject: 'Houston, we have a problem',
+  body: 'Yes Mr. President.'
+};
+
+headquarters.email.send(params);
+```
+
+The allowed parameters for are `to`, `from`, `subject` and `body`.
+This returns a promise that resolves with a success message.
+
+## Github
+
+### pullRequests
+
+To search pull requests you can use the following method:
+
+```js
+var query = 'is:open';
+
+headquarters.github.pullrequests(query);
+```
+
+This method is a proxy to the Github api, it supports the same query parameters.
+The search for pull requests is limited to the user **groupbuddies**.
+It return a promise that resolves with the json response from the Github API, see [here](https://developer.github.com/v3/pulls/#list-pull-requests) for more information.
 
 ## Contributing
 
