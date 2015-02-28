@@ -64,10 +64,20 @@ To search members of the team you might use the `search`
 method:
 
 ```js
-return headquarters.member.search('gabrielpoca@gmail.com');
+return headquarters.member.search('gabriel@groupbuddies.com');
 ```
 
 This returns a promise that resolves an array of members.
+
+### me
+
+To return the current user you can use the `me` method:
+
+```js
+headquarters.member.me()
+```
+
+This returns a promise that resolves with the current user.
 
 ## Email
 

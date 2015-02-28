@@ -12,6 +12,9 @@ module.exports = function (authorization) {
     },
     search: function (query) {
       return request.get(Constants.APIMembersURL + ("?q=" + query));
+    },
+    me: function () {
+      return request.get(Constants.APIMeURL);
     }
   };
 };

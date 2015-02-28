@@ -4,6 +4,7 @@ var APIBaseURL = "https://hq.groupbuddies.com";
 var APIMembersPath = "/members";
 var APIEmailPath = "/emails";
 var APITokenPath = "/oauth/authorize";
+var APIMePath = "/me";
 
 var Github = {
   APIPullRequestPath: "/github/pull_requests"
@@ -17,6 +18,8 @@ var Constants = {
   APIMembersURL: APIBaseURL + APIMembersPath,
   APIEmailPath: APIEmailPath,
   APIEmailURL: APIBaseURL + APIEmailPath,
+  APIMePath: APIMePath,
+  APIMeURL: APIBaseURL + APIMePath,
   Github: {
     APIPullRequestPath: Github.APIPullRequestPath,
     APIPullRequestURL: APIBaseURL + Github.APIPullRequestPath

@@ -10,6 +10,15 @@ router.get('/', function(req, res, next) {
     });
 });
 
+router.get('/me', function(req, res, next) {
+  req.headquarters.member.me()
+    .then(function(user) {
+      res.render('user', {
+        user: user
+      });
+    });
+});
+
 router.get('/search/:query', function(req, res, next) {
   var query = req.params.query;
   req.headquarters.member.search(query)

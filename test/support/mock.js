@@ -5,6 +5,10 @@ var Nock = require('nock');
 
 var defaultToken = 'STUB TOKEN';
 var defaultMembers = [1, 2, 3, 4];
+var defaultMe = {
+  name: 'Gabriel Poça',
+  email: 'gabriel@groupbuddies.com'
+};
 
 function nock(baseURL) {
   baseURL = baseURL || Constants.APIBaseURL;
@@ -26,6 +30,15 @@ function mockMembersSearch(response) {
 
   nock().filteringPath(/q\=.*/, 'q=query')
     .get(Constants.APIMembersPath + '?q=query')
+    .reply(200, response);
+
+  return response;
+}
+
+function mockMe(response) {
+  response = response || defaultMe;
+
+  nock().get('/me')
     .reply(200, response);
 
   return response;
@@ -59,6 +72,7 @@ global.Mock = {
   accessToken: mockAccessToken,
   members: mockMembers,
   membersSearch: mockMembersSearch,
+  me: mockMe,
   email: mockEmail,
   githubPullRequests: mockGithubPullRequest
 };

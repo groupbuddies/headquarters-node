@@ -28,4 +28,11 @@ describe('Members', function() {
         expect(response[0].email).to.equal(queryEmail)
       });
   })
+
+  it('should return the current user', function() {
+    var user = Mock.me()
+
+    return headquarters.member.me()
+      .should.eventually.deep.equal(user);
+  });
 });
