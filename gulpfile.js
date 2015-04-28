@@ -2,7 +2,7 @@ var gulp = require('gulp');
 var babel = require("gulp-babel");
 var mocha = require('gulp-mocha');
 
-libSrc = ['lib/**.js', 'lib/*/**.js'];
+libSrc = ['lib/*/**.js', 'lib/*/**.js', 'lib/*/*/**.js'];
 testSrc = ['test/*.js', 'test/*/**.js'];
 
 gulp.task('default', ['scripts', 'watch']);

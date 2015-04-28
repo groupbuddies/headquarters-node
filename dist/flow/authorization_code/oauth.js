@@ -1,27 +1,23 @@
-var Q = require('q');
-var Oauth = require('simple-oauth2');
-var R = require('ramda');
-var Constants = require('../constants');
+"use strict";
 
-var ALLOWED_KEYS = [
-  'site',
-  'clientID',
-  'clientSecret',
-  'callbackURL'
-];
+var Q = require("q");
+var Oauth = require("simple-oauth2");
+var R = require("ramda");
+var Constants = require("../../constants");
+
+var ALLOWED_KEYS = ["site", "clientID", "clientSecret", "callbackURL"];
 
 function validSettings(settings) {
   return R.all(R.flip(R.prop)(settings), ALLOWED_KEYS);
 }
 
-module.exports = function(settings) {
+module.exports = function (settings) {
   var settings = R.pickAll(ALLOWED_KEYS, settings);
   settings.site = Constants.APIBaseURL;
 
-  if (!validSettings(settings))
-    throw new Error('Invalid settings provided. Please make sure you have [' + ALLOWED_KEYS.join(', ') + ']');
+  if (!validSettings(settings)) throw new Error("Invalid settings provided. Please make sure you have [" + ALLOWED_KEYS.join(", ") + "]");
 
-  var oauth = Oauth(R.omit('callbackURL', settings));
+  var oauth = Oauth(R.omit("callbackURL", settings));
   var callbackURL = settings.callbackURL;
 
   return {
@@ -32,7 +28,7 @@ module.exports = function(settings) {
   function redirectURL() {
     var url = oauth.authCode.authorizeURL({
       redirect_uri: callbackURL
-    })
+    });
 
     return Q(url);
   }

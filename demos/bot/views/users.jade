@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  h1 GB People
+  ul
+    each user in users
+      li
+        = user.name
+        a(href="/users/test/#{user.email}") Test Email

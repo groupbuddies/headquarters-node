@@ -3,9 +3,6 @@
 var Q = require("q");
 var R = require("ramda");
 var Request = require("request");
-var Constants = require("./constants");
-
-var baseURL = Constants.APIBaseURL;
 
 var requestOptions = function (method, token, url) {
   var form = arguments[3] === undefined ? "" : arguments[3];
@@ -26,7 +23,7 @@ var resolveResponse = R.curry(function (deferred, err, response, body) {
   } else {
     var parsedBody;
 
-    if (body) parsedBody = JSON.parse(body);
+    if (body && body !== "") parsedBody = JSON.parse(body);
 
     deferred.resolve(parsedBody);
   }
@@ -36,21 +33,23 @@ module.exports = function (authorization) {
   return {
     get: function (url) {
       var deferred = Q.defer();
-      var accessToken = authorization.accessToken();
 
-      var options = requestOptions("GET", accessToken, url);
+      authorization.accessToken().then(function (accessToken) {
+        var options = requestOptions("GET", accessToken, url);
 
-      Request.get(options, resolveResponse(deferred));
+        Request.get(options, resolveResponse(deferred));
+      });
 
       return deferred.promise;
     },
     post: function (url, body) {
       var deferred = Q.defer();
-      var accessToken = authorization.accessToken();
 
-      var options = requestOptions("POST", accessToken, url, body);
+      authorization.accessToken().then(function (accessToken) {
+        var options = requestOptions("POST", accessToken, url, body);
 
-      Request.post(options, resolveResponse(deferred));
+        Request.post(options, resolveResponse(deferred));
+      });
 
       return deferred.promise;
     }

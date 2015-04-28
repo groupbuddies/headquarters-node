@@ -36,7 +36,6 @@ router.get('/email', function(req, res, next) {
     body: 'Trinta caralho!'
   })
   .then(function(res) {
-    console.log(res);
     res.send(res);
   });
 });

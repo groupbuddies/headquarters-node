@@ -1,5 +1,13 @@
 {
-  "clientID": "dummy_client_id",
-  "clientSecret": "dummy_client_secret",
-  "callbackURL": "https://example.groupbuddies.com/callback"
+  "authorizationCode": {
+    "clientID": "dummy_client_id",
+    "clientSecret": "dummy_client_secret",
+    "callbackURL": "https://example.groupbuddies.com/callback",
+    "type": "authorizationCode"
+  },
+  "clientCredentials": {
+    "clientID": "dummy_client_id",
+    "clientSecret": "dummy_client_secret",
+    "type": "clientCredentials"
+  }
 }

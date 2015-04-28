@@ -1,7 +1,7 @@
 "use strict";
 
-var Q = require("q");
 var R = require("ramda");
+var Q = require("Q");
 
 module.exports = function (options) {
   var settings, token, HQOauth;
@@ -15,7 +15,7 @@ module.exports = function (options) {
 
   function initialize(options) {
     settings = parseUserOptions(options);
-    HQOauth = require("./hq_oauth")(settings);
+    HQOauth = require("./oauth")(settings);
   }
 
   function parseUserOptions(options) {
@@ -33,7 +33,7 @@ module.exports = function (options) {
   function accessToken() {
     var newToken = arguments[0] === undefined ? undefined : arguments[0];
     if (newToken) saveAccessToken(newToken);
-    return token;
+    return Q(token);
   }
 
   function redirectURL() {

@@ -4,7 +4,8 @@ describe('Email', function() {
   var headquarters;
 
   beforeEach(function() {
-    headquarters = Headquarters(Settings);
+    headquarters = Headquarters(Settings.clientCredentials);
+    headquarters.accessToken('accessToken');
   });
 
   it('should send an email', function() {

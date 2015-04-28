@@ -4,7 +4,8 @@ describe('Gihub', function() {
   var headquarters;
 
   beforeEach(function() {
-    headquarters = Headquarters(Settings);
+    headquarters = Headquarters(Settings.clientCredentials);
+    headquarters.accessToken('accessToken');
   });
 
   it('should search for pull requests', function() {
@@ -12,5 +13,5 @@ describe('Gihub', function() {
 
     return headquarters.github.pullRequests('is:open')
       .should.eventually.be.fulfilled;
-  })
+  });
 });
