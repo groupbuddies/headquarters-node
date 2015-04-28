@@ -68,7 +68,6 @@ var Headquarters = require('headquarters-node');
 var credentials = {
   clientID: "dummy_client_id",
   clientSecret: "dummy_client_secret",
-  callbackURL: "https://example.groupbuddies.com/callback"
   type: "clientCredentials"
 };
 
