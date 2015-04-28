@@ -1,7 +1,7 @@
 "use strict";
 
 var Oauth = require("./oauth");
-var Q = require("Q");
+var Q = require("q");
 var R = require("ramda");
 
 module.exports = function (options) {
@@ -25,7 +25,6 @@ module.exports = function (options) {
   }
 
   function saveAccessToken(newToken) {
-    console.log("here", newToken);
     token = newToken.access_token;
     return token;
   }

@@ -1,7 +1,7 @@
 "use strict";
 
 var R = require("ramda");
-var Q = require("Q");
+var Q = require("q");
 
 module.exports = function (options) {
   var settings, token, HQOauth;
