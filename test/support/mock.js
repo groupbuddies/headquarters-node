@@ -62,6 +62,11 @@ function mockEmail() {
     .reply(200);
 }
 
+function mockInvalidEmail() {
+  nock().post(Constants.APIEmailPath)
+    .reply(200, "invalid json response");
+}
+
 function mockGithubPullRequest() {
   nock().filteringPath(/q\=.*/, 'q=query')
     .get(Constants.Github.APIPullRequestPath + '?q=query')
@@ -74,5 +79,6 @@ global.Mock = {
   membersSearch: mockMembersSearch,
   me: mockMe,
   email: mockEmail,
+  invalidEmail: mockInvalidEmail,
   githubPullRequests: mockGithubPullRequest
 };
