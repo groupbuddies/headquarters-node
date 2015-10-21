@@ -1,6 +1,6 @@
 "use strict";
 
-var APIBaseURL = "https://hq.groupbuddies.com";
+var APIBaseURL = "https://hq.subvisual.co";
 var APIMembersPath = "/members";
 var APIEmailPath = "/emails";
 var APITokenPath = "/oauth/authorize";

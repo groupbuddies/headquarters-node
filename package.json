@@ -1,6 +1,6 @@
 {
   "name": "headquarters-node",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Node wrapper for the headquarters API for Group Buddies",
   "homepage": "https://github.com/groupbuddies/headquarters-node",
   "main": "dist/headquarters-node.js",

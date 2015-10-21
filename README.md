@@ -3,7 +3,7 @@ Headquarters-node
 
 [![Build Status](https://semaphoreapp.com/api/v1/projects/f70c710e-d453-4c9e-bdf2-665718bef386/358218/shields_badge.svg)](https://semaphoreapp.com/groupbuddies/headquarters-node)
 
-Node wrapper for the [headquarters API](https://github.com/groupbuddies/headquarters).
+Node wrapper for the [headquarters API](https://github.com/subvisual/headquarters).
 
 
 
@@ -24,7 +24,7 @@ Before making request you need to authorization your application. At the moment 
 
 This flow allows you to authorize each person, retrieving an access token to make requests in the name of the user.
 
-Instantiate headquarters-node with the `clientID` `clientSecret` and `callbackURL` (you need to have an application registered on the [headquarters](https://hq.groupbuddies.com/admin) first):
+Instantiate headquarters-node with the `clientID` `clientSecret` and `callbackURL` (you need to have an application registered on the [headquarters](https://hq.subvisual.co/admin) first):
 
 ```js
 var Headquarters = require('headquarters-node');
@@ -32,7 +32,7 @@ var Headquarters = require('headquarters-node');
 var credentials = {
   clientID: "dummy_client_id",
   clientSecret: "dummy_client_secret",
-  callbackURL: "https://example.groupbuddies.com/callback"
+  callbackURL: "https://example.subvisual.co/callback"
   type: "authorizationCode"
 };
 
@@ -60,7 +60,7 @@ This method returns a promise when finished. After that you can start making req
 This flow allows your application to make requests without user authorization. It works as if your application is an user by himself. This can be used for requests that don't need to be associated to a user.
 
 
-Instantiate headquarters-node with `clientID` and `clientSecret` (you need to have an application registered on the [headquarters](https://hq.groupbuddies.com/admin) first):
+Instantiate headquarters-node with `clientID` and `clientSecret` (you need to have an application registered on the [headquarters](https://hq.subvisual.co/admin) first):
 
 ```js
 var Headquarters = require('headquarters-node');
@@ -99,7 +99,7 @@ To search members of the team you might use the `search`
 method:
 
 ```js
-return headquarters.member.search('gabriel@groupbuddies.com');
+return headquarters.member.search('gabriel@subvisual.com');
 ```
 
 This returns a promise that resolves an array of members.
@@ -126,7 +126,7 @@ To send emails you can use the following method:
 
 ```js
 var params = {
-  to: 'gabriel@groupbuddies.com',
+  to: 'gabriel@subvisual.com',
   subject: 'Houston, we have a problem',
   body: 'Yes Mr. President.'
 };
@@ -155,7 +155,7 @@ headquarters.github.pullrequests(query);
 ```
 
 This method is a proxy to the Github api, it supports the same query parameters.
-The search for pull requests is limited to the user **groupbuddies**.
+The search for pull requests is limited to the user **subvisual**.
 It return a promise that resolves with the json response from the Github API, see [here](https://developer.github.com/v3/pulls/#list-pull-requests) for more information.
 
 
@@ -168,7 +168,7 @@ Contributing
 To contribute you need to setup the development environment. First clone the project.
 
 ```
-git clone git@github.com:groupbuddies/headquarters-node.git
+git clone git@github.com:subvisual/headquarters-node.git
 ```
 
 Then install the development dependencies.
